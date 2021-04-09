@@ -252,7 +252,7 @@ export class ReactNativeModal extends React.Component {
     };
     this.isDirectionIncluded = direction => {
       return Array.isArray(this.props.swipeDirection)
-        ? this.props.swipeDirection.indexOf(direction) !== -1
+        ? this.props.swipeDirection.includes(direction)
         : this.props.swipeDirection === direction;
     };
     this.isSwipeDirectionAllowed = ({dy, dx}) => {
@@ -540,6 +540,7 @@ export class ReactNativeModal extends React.Component {
       backdropTransitionInTiming,
       backdropTransitionOutTiming,
       customBackdrop,
+      customModalComponent,
       children,
       isVisible,
       onModalShow,
@@ -603,8 +604,9 @@ export class ReactNativeModal extends React.Component {
         containerView,
       );
     }
+    const ModalComponent = customModalComponent || Modal;
     return React.createElement(
-      Modal,
+      ModalComponent,
       Object.assign(
         {
           transparent: true,

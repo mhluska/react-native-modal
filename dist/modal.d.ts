@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   Animated,
+  Modal,
   PanResponderGestureState,
   PanResponderInstance,
   StyleProp,
@@ -58,6 +59,7 @@ export interface ModalProps extends ViewProps {
   backdropTransitionInTiming: number;
   backdropTransitionOutTiming: number;
   customBackdrop: React.ReactNode;
+  customModalComponent: React.ComponentClass<Modal['props']>;
   useNativeDriver: boolean;
   useNativeDriverForBackdrop?: boolean;
   deviceHeight: number;
@@ -196,7 +198,7 @@ export declare class ReactNativeModal extends React.Component<
   ) => 'left' | 'right' | 'up' | 'down';
   calcDistancePercentage: (gestureState: PanResponderGestureState) => number;
   createAnimationEventForSwipe: () => (...args: any[]) => void;
-  isDirectionIncluded: (direction: Direction) => boolean;
+  isDirectionIncluded: (direction: Direction) => any;
   isSwipeDirectionAllowed: ({dy, dx}: PanResponderGestureState) => boolean;
   handleDimensionsUpdate: () => void;
   open: () => void;
