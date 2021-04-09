@@ -695,6 +695,7 @@ ReactNativeModal.defaultProps = {
   backdropTransitionInTiming: 300,
   backdropTransitionOutTiming: 300,
   customBackdrop: null,
+  customModalComponent: null,
   useNativeDriver: false,
   deviceHeight: null,
   deviceWidth: null,

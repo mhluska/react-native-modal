@@ -147,6 +147,7 @@ export declare class ReactNativeModal extends React.Component<
     backdropTransitionInTiming: number;
     backdropTransitionOutTiming: number;
     customBackdrop: null;
+    customModalComponent: null;
     useNativeDriver: boolean;
     deviceHeight: null;
     deviceWidth: null;
