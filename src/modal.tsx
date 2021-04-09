@@ -85,6 +85,7 @@ export interface ModalProps extends ViewProps {
   backdropTransitionInTiming: number;
   backdropTransitionOutTiming: number;
   customBackdrop: React.ReactNode;
+  customModalComponent: React.ComponentClass<Modal['props']>;
   useNativeDriver: boolean;
   useNativeDriverForBackdrop?: boolean;
   deviceHeight: number;
@@ -759,6 +760,7 @@ export class ReactNativeModal extends React.Component<ModalProps, State> {
       backdropTransitionInTiming,
       backdropTransitionOutTiming,
       customBackdrop,
+      customModalComponent,
       children,
       isVisible,
       onModalShow,
@@ -824,8 +826,11 @@ export class ReactNativeModal extends React.Component<ModalProps, State> {
         </View>
       );
     }
+
+    const ModalComponent = customModalComponent || Modal;
+
     return (
-      <Modal
+      <ModalComponent
         transparent={true}
         animationType={'none'}
         visible={this.state.isVisible}
@@ -843,7 +848,7 @@ export class ReactNativeModal extends React.Component<ModalProps, State> {
         ) : (
           containerView
         )}
-      </Modal>
+      </ModalComponent>
     );
   }
 }
