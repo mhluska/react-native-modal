@@ -181,6 +181,7 @@ export class ReactNativeModal extends React.Component<ModalProps, State> {
     backdropTransitionInTiming: 300,
     backdropTransitionOutTiming: 300,
     customBackdrop: null,
+    customModalComponent: null,
     useNativeDriver: false,
     deviceHeight: null,
     deviceWidth: null,
