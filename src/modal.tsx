@@ -85,7 +85,7 @@ export interface ModalProps extends ViewProps {
   backdropTransitionInTiming: number;
   backdropTransitionOutTiming: number;
   customBackdrop: React.ReactNode;
-  customModalComponent: React.ComponentClass<Modal['props']>;
+  customModalComponent: React.ComponentType<Modal['props']>;
   useNativeDriver: boolean;
   useNativeDriverForBackdrop?: boolean;
   deviceHeight: number;
