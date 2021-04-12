@@ -57,13 +57,18 @@ export class ReactNativeModal extends React.Component {
       }
       return false;
     };
+    this.shouldPropagateSwipe = (evt, gestureState) => {
+      return typeof this.props.propagateSwipe === 'function'
+        ? this.props.propagateSwipe(evt, gestureState)
+        : this.props.propagateSwipe;
+    };
     this.buildPanResponder = () => {
       let animEvt = null;
       this.panResponder = PanResponder.create({
         onMoveShouldSetPanResponder: (evt, gestureState) => {
           // Use propagateSwipe to allow inner content to scroll. See PR:
           // https://github.com/react-native-community/react-native-modal/pull/246
-          if (!this.props.propagateSwipe) {
+          if (!this.shouldPropagateSwipe(evt, gestureState)) {
             // The number "4" is just a good tradeoff to make the panResponder
             // work correctly even when the modal has touchable buttons.
             // For reference:
@@ -89,7 +94,7 @@ export class ReactNativeModal extends React.Component {
             );
           if (
             hasScrollableView &&
-            this.props.propagateSwipe &&
+            this.shouldPropagateSwipe(e, gestureState) &&
             this.props.scrollTo &&
             this.props.scrollOffset > 0
           ) {
@@ -649,7 +654,7 @@ ReactNativeModal.propTypes = {
   deviceWidth: PropTypes.number,
   isVisible: PropTypes.bool.isRequired,
   hideModalContentWhileAnimating: PropTypes.bool,
-  propagateSwipe: PropTypes.bool,
+  propagateSwipe: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
   onModalShow: PropTypes.func,
   onModalWillShow: PropTypes.func,
   onModalHide: PropTypes.func,

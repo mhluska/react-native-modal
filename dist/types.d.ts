@@ -1,5 +1,5 @@
 import {Animation, CustomAnimation} from 'react-native-animatable';
-import {NativeSyntheticEvent} from 'react-native';
+import {NativeSyntheticEvent, NativeTouchEvent} from 'react-native';
 export declare type OrNull<T> = null | T;
 export declare type SupportedAnimation = Animation | CustomAnimation;
 export declare type Animations = {
@@ -22,3 +22,5 @@ export declare type PresentationStyle =
 export declare type OnOrientationChange = (
   orientation: NativeSyntheticEvent<any>,
 ) => void;
+export interface GestureResponderEvent
+  extends NativeSyntheticEvent<NativeTouchEvent> {}

@@ -16,6 +16,7 @@ import {
   OrNull,
   PresentationStyle,
   OnOrientationChange,
+  GestureResponderEvent,
 } from './types';
 export declare type OnSwipeCompleteParams = {
   swipingDirection: Direction;
@@ -65,7 +66,12 @@ export interface ModalProps extends ViewProps {
   deviceHeight: number;
   deviceWidth: number;
   hideModalContentWhileAnimating: boolean;
-  propagateSwipe: boolean;
+  propagateSwipe:
+    | boolean
+    | ((
+        event: GestureResponderEvent,
+        gestureState: PanResponderGestureState,
+      ) => boolean);
   isVisible: boolean;
   onModalShow: () => void;
   onModalWillShow: () => void;
@@ -110,7 +116,7 @@ export declare class ReactNativeModal extends React.Component<
     deviceWidth: PropTypes.Requireable<number>;
     isVisible: PropTypes.Validator<boolean>;
     hideModalContentWhileAnimating: PropTypes.Requireable<boolean>;
-    propagateSwipe: PropTypes.Requireable<boolean>;
+    propagateSwipe: PropTypes.Requireable<boolean | ((...args: any[]) => any)>;
     onModalShow: PropTypes.Requireable<(...args: any[]) => any>;
     onModalWillShow: PropTypes.Requireable<(...args: any[]) => any>;
     onModalHide: PropTypes.Requireable<(...args: any[]) => any>;
@@ -190,6 +196,10 @@ export declare class ReactNativeModal extends React.Component<
   getDeviceHeight: () => number;
   getDeviceWidth: () => number;
   onBackButtonPress: () => boolean;
+  shouldPropagateSwipe: (
+    evt: GestureResponderEvent,
+    gestureState: PanResponderGestureState,
+  ) => boolean;
   buildPanResponder: () => void;
   getAccDistancePerDirection: (
     gestureState: PanResponderGestureState,

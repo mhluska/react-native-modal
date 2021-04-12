@@ -8,5 +8,6 @@ export {
   Direction,
   PresentationStyle,
   OnOrientationChange,
+  GestureResponderEvent,
 } from './types';
 export default ReactNativeModal;
